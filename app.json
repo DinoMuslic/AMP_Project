@@ -1,0 +1,32 @@
+{
+  "expo": {
+    "scheme": "folwershop",
+    "name": "AMP_Flower_Shop",
+    "slug": "AMP_Flower_Shop",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/img/flower.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/img/flower.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/img/flower.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "web": {
+      "favicon": "./assets/img/flower.png"
+    },
+    "plugins": [
+      "expo-router"
+    ]
+  }
+}
