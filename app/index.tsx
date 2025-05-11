@@ -1,64 +1,55 @@
 import {
-  Dimensions,
-  ImageBackground,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from "react-native";
-import { Link } from "expo-router";
+import { useRouter } from "expo-router";
 
-export default function Page() {
+const Page = () => {
+  const router = useRouter();
   return (
     <View style={styles.container}>
-      <ImageBackground
-        source={require("../assets/img/background.jpg")}
-        style={styles.backgroundImage}
-        resizeMode="cover"
-      >
-        <Text style={[styles.text, styles.header ]}>Welcome to the Flower Shop</Text>
-        <Text style={styles.text}>Clicking the Button bellow You can</Text>
-        <Link href="/login" style={styles.link}>
-          Login
-        </Link>
-        <Text style={styles.text}>Or if You don't have an Account You can</Text>
-        <Link href="/register" style={styles.link}>
-          Sign Up
-        </Link>
-      </ImageBackground>
+      <View style={styles.textContainer}>
+        <Text style={styles.h1}>Flower Shop</Text>
+        <Text style={styles.text}>Welcome to the Flower shop</Text>
+        <Text style={styles.text}>To proceed click the Button below</Text>
+        <TouchableOpacity onPress={() => router.push("/register")}>
+          <Text style={styles.register}>Register</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
-}
+};
 
-const { height } = Dimensions.get("window");
+export default Page;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
-  },
-  text: {
-    color: "#fff",
-    fontSize: 18,
-    marginVertical: 15,
-    fontWeight: "bold",
-  },
-  header: {
-    fontSize: 32,
-    textAlign: "center",
-  },
-  backgroundImage: {
-    width: "100%",
-    height: height,
+    flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    padding: 24,
   },
-  link: {
-    marginVertical: 10,
-    backgroundColor: "#eee",
-    padding: 6,
-    borderRadius: 10,
-    borderColor: "#7c85fc",
-    borderWidth: 1.5,
-    width: 150,
+  h1: {
+    fontSize: 32,
+    fontWeight: "bold",
     textAlign: "center",
+  },
+  text: {
+    fontSize: 24,
+    textAlign: "center",
+    marginTop: 24,
+    color: "gray",
+  },
+  textContainer: {
+    marginTop: 64,
+  },
+  register: {
+    marginLeft: 5,
+    color: "#00A0B6",
+    fontSize: 22,
+    textAlign: "center",
+    marginTop: 24,
   },
 });
