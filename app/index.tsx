@@ -1,5 +1,6 @@
 import {
   ActivityIndicator,
+  InteractionManager,
   StyleSheet,
   View,
 } from "react-native";
@@ -10,7 +11,11 @@ const Page = () => {
   const router = useRouter();
 
   useEffect(() => {
-    router.replace("/login");
+    const task = InteractionManager.runAfterInteractions(() => {
+      router.replace("/login");
+    });
+
+    return () => task.cancel(); // cleanup
   }, []);
 
   return (
