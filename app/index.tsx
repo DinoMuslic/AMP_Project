@@ -1,23 +1,21 @@
 import {
+  ActivityIndicator,
   StyleSheet,
-  Text,
-  TouchableOpacity,
   View,
 } from "react-native";
+import { useEffect } from "react";
 import { useRouter } from "expo-router";
 
 const Page = () => {
   const router = useRouter();
+
+  useEffect(() => {
+    router.replace("/login");
+  }, []);
+
   return (
     <View style={styles.container}>
-      <View style={styles.textContainer}>
-        <Text style={styles.h1}>Flower Shop</Text>
-        <Text style={styles.text}>Welcome to the Flower shop</Text>
-        <Text style={styles.text}>To proceed click the Button below</Text>
-        <TouchableOpacity onPress={() => router.push("/register")}>
-          <Text style={styles.register}>Register</Text>
-        </TouchableOpacity>
-      </View>
+      <ActivityIndicator size={"large"} color={"#00A0B6"}/>
     </View>
   );
 };
@@ -29,7 +27,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    padding: 24,
   },
   h1: {
     fontSize: 32,
