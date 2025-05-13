@@ -38,7 +38,6 @@ const Login = () => {
     }
 
     setError("");
-    console.log("User successfully logged in.");
     router.push("/home");
   }
 
