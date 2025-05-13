@@ -7,11 +7,13 @@ import {
   View,
 } from "react-native";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useRouter } from "expo-router";
-
+import { login } from "../state/userSlice";
 import Entypo from "@expo/vector-icons/Entypo";
 
 const Login = () => {
+  const dispatch = useDispatch();
   const router = useRouter();
 
   const [email, setEmail] = useState("");
@@ -32,14 +34,15 @@ const Login = () => {
   };
 
   const handleLogin = () => {
-    if(email !== "dino@gmail.com" || password !== "password") {
+    if (email !== "dino@gmail.com" || password !== "password") {
       setError("Invalid credentials");
-      return false;
+      return;
     }
 
+    dispatch(login({ username: "Dino", email, password, role: "regular" }));
     setError("");
     router.push("/home");
-  }
+  };
 
   return (
     <ScrollView
@@ -84,7 +87,7 @@ const Login = () => {
             )}
           </View>
 
-          { error !== "" && <Text style={styles.error}>{error}</Text> }
+          {error !== "" && <Text style={styles.error}>{error}</Text>}
 
           <TouchableOpacity style={styles.loginBtn} onPress={handleLogin}>
             <Text style={{ color: "#fff", fontSize: 18 }}>Login</Text>
@@ -167,5 +170,5 @@ const styles = StyleSheet.create({
   },
   error: {
     color: "red",
-  }
+  },
 });
