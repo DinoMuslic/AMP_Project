@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     borderColor: "#00A0B6",
   },
   flowerName: {
-    fontSize: 20,
+    fontSize: 22,
     color: "#00A0B6",
     fontWeight: "bold",
     textAlign: "center",
