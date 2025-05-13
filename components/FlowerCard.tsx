@@ -110,6 +110,7 @@ const styles = StyleSheet.create({
   },
   orderBtn: {
     marginTop: 15,
+    marginBottom: 10,
     backgroundColor: "#00A0B6",
     width: 120,
     padding: 6,
