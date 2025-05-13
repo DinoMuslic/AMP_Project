@@ -34,12 +34,12 @@ const Login = () => {
   };
 
   const handleLogin = () => {
-    if (email !== "dino@gmail.com" || password !== "password") {
-      setError("Invalid credentials");
-      return;
-    }
+    // if (email !== "dino@gmail.com" || password !== "password") {
+    //   setError("Invalid credentials");
+    //   return;
+    // }
 
-    dispatch(login({ username: "Dino", email, password, role: "regular" }));
+    dispatch(login({ username: "User", email, password, role: "regular" }));
     setError("");
     router.push("/home");
   };

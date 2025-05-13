@@ -6,9 +6,8 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { use, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "expo-router";
-
 import Entypo from "@expo/vector-icons/Entypo";
 
 const Register = () => {
