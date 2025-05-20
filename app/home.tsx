@@ -10,10 +10,10 @@ import {
 } from "react-native";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import { RootState } from "../state/store";
 import FlowerCard from "../components/FlowerCard";
 import { clear, remove, decrement } from "../state/cartSlice";
-
 import { getAllFlowers } from "../services/flowerService";
 
 const Home = () => {
