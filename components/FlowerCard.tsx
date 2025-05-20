@@ -7,7 +7,9 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { useDispatch } from "react-redux";
 import Entypo from "@expo/vector-icons/Entypo";
+import { add } from "../state/cartSlice";
 
 interface Props {
   name: string;
@@ -18,6 +20,11 @@ interface Props {
 }
 
 const FlowerCard = ({ name, type, description, price, image }: Props) => {
+  const dispatch = useDispatch();
+  const handleAdd = () => {
+    dispatch(add({ item: name, price }));
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.imageContanier}>
@@ -34,8 +41,11 @@ const FlowerCard = ({ name, type, description, price, image }: Props) => {
         <Text style={styles.price}>${price.toFixed(2)}</Text>
         <View style={styles.orderContainer}>
           <TouchableOpacity style={styles.orderBtn}>
-            <Text style={{ textAlign: "center", color: "#fff", fontSize: 14 }}>
-              Place Order
+            <Text
+              style={{ textAlign: "center", color: "#00A0B6", fontSize: 14, fontWeight: "bold" }}
+              onPress={handleAdd}
+            >
+              Add to Cart
             </Text>
           </TouchableOpacity>
         </View>
@@ -48,17 +58,17 @@ export default FlowerCard;
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
+    width: 350,
     backgroundColor: "#f0efed",
     borderWidth: 2,
     borderColor: "#00A0B6",
     borderRadius: 10,
-    marginBottom: 35,
+    marginRight: 24,
     overflow: "hidden",
   },
   imageContanier: {
     width: "100%",
-    aspectRatio: 1.85,
+    aspectRatio: 1.75,
   },
   img: {
     width: "100%",
@@ -103,6 +113,7 @@ const styles = StyleSheet.create({
     color: "green",
     textAlign: "center",
     marginTop: 10,
+    marginBottom: 20,
   },
   orderContainer: {
     alignItems: "center",
@@ -111,7 +122,6 @@ const styles = StyleSheet.create({
   orderBtn: {
     marginTop: 15,
     marginBottom: 10,
-    backgroundColor: "#00A0B6",
     width: 120,
     padding: 6,
     borderRadius: 15,
