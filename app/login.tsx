@@ -10,6 +10,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useRouter } from "expo-router";
 import { login } from "../state/userSlice";
+import { loginService } from "../services/authService";
 import Entypo from "@expo/vector-icons/Entypo";
 
 const Login = () => {
@@ -33,15 +34,21 @@ const Login = () => {
     setSecureTextEntry(!secureTextEntry);
   };
 
-  const handleLogin = () => {
-    // if (email !== "dino@gmail.com" || password !== "password") {
-    //   setError("Invalid credentials");
-    //   return;
-    // }
+  const handleLogin = async () => {
+    try {
+      const user = await loginService(email, password);
 
-    dispatch(login({ username: "User", email, password, role: "regular" }));
-    setError("");
-    router.push("/home");
+      if (!user) {
+        setError("Invalid credentials");
+        return;
+      }
+
+      dispatch(login(user));
+      setError("");
+      router.push("/home");
+    } catch (err) {
+      setError("Login failed. Please try again.");
+    }
   };
 
   return (
