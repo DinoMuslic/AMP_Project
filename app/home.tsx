@@ -31,7 +31,7 @@ const Home = () => {
   useEffect(() => {
     const fetchFlowers = async () => {
       const fetchedFlowers = await getAllFlowers();
-      setFlowers(fetchedFlowers);
+      setFlowers(fetchedFlowers || []);
     };
     fetchFlowers();
   }, []);
@@ -95,7 +95,7 @@ const Home = () => {
         />
       ) : (
         <View style={styles.noMatches}>
-          <Text>No flowers found matching your search.</Text>
+          <Text>No flowers to display.</Text>
         </View>
       )}
 
