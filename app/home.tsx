@@ -31,7 +31,7 @@ const Home = () => {
         style={styles.list}
         data={flowers}
         renderItem={({ item }) => {
-          const image = imageMapping[item.image.split(".")[0]]; // Map the image name to the require statement
+          const image = imageMapping[item.image.split(".")[0]];
           return (
             <FlowerCard
               name={item.name}
