@@ -90,6 +90,7 @@ const Register = () => {
           <TextInput
             style={styles.textInput}
             placeholder="Username"
+            autoCapitalize="none"
             value={username}
             onChangeText={handleUsername}
           />
@@ -97,6 +98,7 @@ const Register = () => {
             style={styles.textInput}
             keyboardType="email-address"
             placeholder="Email"
+            autoCapitalize="none"
             value={email}
             onChangeText={handleEmail}
           />
@@ -105,6 +107,7 @@ const Register = () => {
             <TextInput
               style={{ borderColor: "gray", width: "90%" }}
               placeholder="Password"
+              autoCapitalize="none"
               secureTextEntry={secureTextEntry}
               value={password}
               onChangeText={handlePassword}
@@ -130,6 +133,7 @@ const Register = () => {
             <TextInput
               style={{ borderColor: "gray", width: "90%" }}
               placeholder="Confirm Password"
+              autoCapitalize="none"
               secureTextEntry={secureTextEntry}
               value={confirmPassword}
               onChangeText={handleConfirmPassword}

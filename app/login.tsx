@@ -65,6 +65,7 @@ const Login = () => {
             style={styles.textInput}
             keyboardType="email-address"
             placeholder="Email"
+            autoCapitalize="none"
             value={email}
             onChangeText={handleEmail}
           />
@@ -73,6 +74,7 @@ const Login = () => {
             <TextInput
               style={{ borderColor: "gray", width: "90%" }}
               placeholder="Password"
+              autoCapitalize="none"
               secureTextEntry={secureTextEntry}
               value={password}
               onChangeText={handlePassword}
