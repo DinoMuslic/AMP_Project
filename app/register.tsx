@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import { useState } from "react";
 import { useRouter } from "expo-router";
+import { registerService } from "../services/authService";
 import Entypo from "@expo/vector-icons/Entypo";
 
 const Register = () => {
@@ -46,7 +47,7 @@ const Register = () => {
     return emailRegex.test(email);
   };
 
-  const handleRegister = () => {
+  const handleRegister = async () => {
     if (username === "" || email === "" || password === "") {
       setError("All fields are requiered.");
       return false;
@@ -62,16 +63,16 @@ const Register = () => {
       return false;
     }
 
-    setError("");
-    setSuccess("Successfully registered.");
+    const response = await registerService(username, email, password);
 
-    const user = {
-      username: username,
-      email: email,
-      password: password,
-    };
-
-    console.log("User: ", user);
+    if (response === "Server error occured") {
+      setError(response);
+      setSuccess("");
+      return false;
+    } else {
+      setError("");
+      setSuccess("Successfully registered.");
+    }
 
     return true;
   };
