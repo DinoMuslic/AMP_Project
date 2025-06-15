@@ -178,6 +178,7 @@ const styles = StyleSheet.create({
     borderColor: "#00A0B6",
     borderRadius: 15,
     marginTop: 32,
+    marginBottom: 32,
   },
   totalText: {
     color: "green",
