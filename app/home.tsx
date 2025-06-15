@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "expo-router";
 
 import { RootState } from "../state/store";
 import FlowerCard from "../components/FlowerCard";
@@ -17,6 +18,8 @@ import { clear, remove, decrement } from "../state/cartSlice";
 import { getAllFlowers } from "../services/flowerService";
 
 const Home = () => {
+  const router = useRouter();
+
   type Flower = {
     id: number;
     name: string;
@@ -106,7 +109,7 @@ const Home = () => {
               <Text style={styles.totalText}>
                 Total: ${totalPrice.toFixed(2)}
               </Text>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => router.push("/order")}>
                 <Text style={styles.order}>Order</Text>
               </TouchableOpacity>
             </View>
