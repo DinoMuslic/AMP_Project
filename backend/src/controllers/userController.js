@@ -1,5 +1,4 @@
 const User = require("../models/userModel.js");
-const bcrypt = require('bcrypt');
 
 const getUserByUsernameOrEmail = async (req, res) => {
   try {
