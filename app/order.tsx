@@ -10,6 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../state/store";
 import { clear } from "../state/cartSlice";
 import { useRouter } from "expo-router";
+import { postOrder } from "../services/orderService";
 
 const Order = () => {
   const [fullName, setFullName] = useState("");
@@ -29,23 +30,17 @@ const Order = () => {
       return;
     }
 
-    // This is where you'd normally fetch user_id via API
-    const userIdentifier = user.email || user.username || "unknown user";
-
-    // Example logging - replace with actual POST call if needed
-    console.log("Order placed by:", userIdentifier);
-    console.log("Total price:", totalPrice);
-    console.log("Shipping to:", address);
+    const userId = user.id || -1;
+    await postOrder(userId, fullName, phone, address, totalPrice);
 
     setMessage("Order successfully placed");
 
-    // Optional: clear the cart and reset form
     dispatch(clear());
     setFullName("");
     setPhone("");
     setAddress("");
 
-    setTimeout(() => router.replace("/"), 2000);
+    setTimeout(() => router.replace("/home"), 2000);
   };
 
   return (
