@@ -3,7 +3,7 @@ const db = require("./db");
 const login = async (username_email, password) => {
   try {
     const rows = await db.query(
-      "SELECT * FROM users WHERE (username = ? OR email = ?) AND password = ?",
+      "SELECT * FROM users WHERE (BINARY username = ? OR BINARY email = ?) AND password = ?",
       [username_email, username_email, password]
     );
 
