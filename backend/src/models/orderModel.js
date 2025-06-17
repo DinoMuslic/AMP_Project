@@ -5,7 +5,7 @@ const getAllOrders = async () => {
     const orders = await db.query("SELECT * FROM orders");
     return orders[0];
   } catch (error) {
-    console.error("Databaseerror:", error);
+    console.error("Database error:", error);
     throw error;
   }
 };
