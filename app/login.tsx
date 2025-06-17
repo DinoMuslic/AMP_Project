@@ -44,6 +44,7 @@ const Login = () => {
       }
 
       dispatch(login(user));
+      console.log("user:", user);
       setError("");
       router.push("/home");
     } catch (err) {
@@ -64,7 +65,7 @@ const Login = () => {
           <TextInput
             style={styles.textInput}
             keyboardType="email-address"
-            placeholder="Email"
+            placeholder="Username / Email"
             autoCapitalize="none"
             value={email}
             onChangeText={handleEmail}
