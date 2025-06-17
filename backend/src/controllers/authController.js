@@ -1,6 +1,6 @@
 const Auth = require("../models/authModel.js");
 const User = require("../models/userModel.js");
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
 
 const login = async (req, res) => {
   try {
@@ -8,7 +8,7 @@ const login = async (req, res) => {
     const password = req.body.password;
     const hash = await User.getUserPassword(usernameEmail);
 
-    if(hash.length == 0) {
+    if (hash.length == 0) {
       res.status(401).json({ message: "Wrong credentials" });
       return;
     }
@@ -16,7 +16,9 @@ const login = async (req, res) => {
     const isMatching = await bcrypt.compare(password, hash[0].password);
 
     const user = await Auth.login(usernameEmail, hash[0].password);
-    user.length == 0 || !isMatching ? res.status(401).json({ message: "Wrong credentials" }) : res.status(201).json({ message: "Successfully logged in"});
+    user.length == 0 || !isMatching
+      ? res.status(401).json({ message: "Wrong credentials" })
+      : res.status(201).json(user[0]);
   } catch (error) {
     console.error("Error fetching user:", error);
     res.status(500).json({ error: "Server error" });
@@ -36,4 +38,4 @@ const register = async (req, res) => {
   }
 };
 
-module.exports = { login, register }
+module.exports = { login, register };
