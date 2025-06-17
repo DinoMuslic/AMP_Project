@@ -44,6 +44,13 @@ const RootLayout = () => {
           }}
         />
         <Stack.Screen name="order" options={{ title: "Order" }} />
+        <Stack.Screen
+          name="admin"
+          options={{
+            title: "Admin Page",
+            headerRight: () => <LogoutButton />,
+          }}
+        />
       </Stack>
     </Provider>
   );
