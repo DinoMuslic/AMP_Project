@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -6,6 +6,10 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../state/store";
+import { clear } from "../state/cartSlice";
+import { useRouter } from "expo-router";
 
 const Order = () => {
   const [fullName, setFullName] = useState("");
@@ -13,24 +17,35 @@ const Order = () => {
   const [address, setAddress] = useState("");
   const [message, setMessage] = useState("");
 
-  const handleFullName = (text: string) => {
-    setFullName(text);
-  };
+  const totalPrice = useSelector((state: RootState) => state.cart.totalPrice);
+  const user = useSelector((state: RootState) => state.user);
+  const dispatch = useDispatch();
+  const router = useRouter();
 
-  const handlePhone = (text: string) => {
-    setPhone(text);
-  };
-
-  const handleAddress = (text: string) => {
-    setAddress(text);
-  };
-
-  const handleOrder = () => {
-    if (fullName === "" || phone === "" || address === "") {
-      setMessage("All fields are requiered");
-    } else {
-      setMessage("Order successfully placed");
+  const handleOrder = async () => {
+    if (!fullName || !phone || !address) {
+      setMessage("All fields are required");
+      setTimeout(() => { setMessage("") }, 3000);
+      return;
     }
+
+    // This is where you'd normally fetch user_id via API
+    const userIdentifier = user.email || user.username || "unknown user";
+
+    // Example logging - replace with actual POST call if needed
+    console.log("Order placed by:", userIdentifier);
+    console.log("Total price:", totalPrice);
+    console.log("Shipping to:", address);
+
+    setMessage("Order successfully placed");
+
+    // Optional: clear the cart and reset form
+    dispatch(clear());
+    setFullName("");
+    setPhone("");
+    setAddress("");
+
+    setTimeout(() => router.replace("/"), 2000);
   };
 
   return (
@@ -42,7 +57,7 @@ const Order = () => {
           <TextInput
             placeholder="Full Name"
             value={fullName}
-            onChangeText={handleFullName}
+            onChangeText={setFullName}
           />
         </View>
 
@@ -50,7 +65,8 @@ const Order = () => {
           <TextInput
             placeholder="Phone"
             value={phone}
-            onChangeText={handlePhone}
+            onChangeText={setPhone}
+            keyboardType="phone-pad"
           />
         </View>
 
@@ -58,23 +74,31 @@ const Order = () => {
           <TextInput
             placeholder="Address"
             value={address}
-            onChangeText={handleAddress}
+            onChangeText={setAddress}
           />
         </View>
 
-        {message !== "All fields are requiered" ? (
-          <Text style={styles.success}>{message}</Text>
-        ) : (
-          <Text style={styles.error}>{message}</Text>
+        <Text style={styles.totalText}>Total: ${totalPrice.toFixed(2)}</Text>
+
+        {message && (
+          <Text
+            style={
+              message.includes("successfully") ? styles.success : styles.error
+            }
+          >
+            {message}
+          </Text>
         )}
 
         <TouchableOpacity onPress={handleOrder}>
-          <Text style={styles.orderBtn}>Order</Text>
+          <Text style={styles.orderBtn}>Place Order</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
 };
+
+export default Order;
 
 const styles = StyleSheet.create({
   container: {
@@ -94,18 +118,6 @@ const styles = StyleSheet.create({
     marginTop: 128,
     alignItems: "center",
   },
-  inputContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    borderWidth: 1,
-    borderColor: "gray",
-    marginBottom: 24,
-    borderRadius: 15,
-    paddingHorizontal: 15,
-    paddingVertical: 2,
-    width: "100%",
-  },
   textInput: {
     borderWidth: 1,
     borderColor: "gray",
@@ -115,6 +127,11 @@ const styles = StyleSheet.create({
     paddingLeft: 8,
     width: "100%",
   },
+  totalText: {
+    fontSize: 18,
+    color: "green",
+    marginBottom: 12,
+  },
   orderBtn: {
     textAlign: "center",
     fontSize: 18,
@@ -122,16 +139,15 @@ const styles = StyleSheet.create({
     padding: 16,
     backgroundColor: "#00A0B6",
     width: 150,
-    alignItems: "center",
     borderRadius: 32,
     marginTop: 8,
   },
   success: {
     color: "green",
+    marginBottom: 12,
   },
   error: {
     color: "red",
+    marginBottom: 12,
   },
 });
-
-export default Order;
