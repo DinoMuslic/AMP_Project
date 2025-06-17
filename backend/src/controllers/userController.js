@@ -1,5 +1,15 @@
 const User = require("../models/userModel.js");
 
+const getAllUsers = async (req, res) => {
+  try {
+    const users = await User.getAllUsers();
+    res.status(201).json(users);
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    res.status(500).json({error: "Server error"});
+  }
+}
+
 const getUserByUsernameOrEmail = async (req, res) => {
   try {
     const usernameEmail = req.body.username_email;
@@ -23,4 +33,4 @@ const getUserPassword = async (req, res) => {
   }
 };
 
-module.exports = { getUserByUsernameOrEmail, getUserPassword }
+module.exports = { getAllUsers, getUserByUsernameOrEmail, getUserPassword }

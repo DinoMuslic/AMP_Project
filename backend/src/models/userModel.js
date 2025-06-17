@@ -1,5 +1,15 @@
 const db = require("./db");
 
+const getAllUsers = async () => {
+  try {
+    const rows = await db.query("SELECT id, username, email, role FROM users");
+    return rows[0];
+  } catch (error) {
+    console.error("Database error:", error);
+    throw error;
+  }
+}
+
 const getUserByUsernameOrEmail = async username_email => {
   try {
     const rows = await db.query(
@@ -26,4 +36,4 @@ const getUserPassword = async username_email => {
   }
 }
 
-module.exports = { getUserByUsernameOrEmail, getUserPassword };
+module.exports = { getAllUsers, getUserByUsernameOrEmail, getUserPassword };
