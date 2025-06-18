@@ -22,3 +22,13 @@ export const postOrder = async (
     console.log("Error:", error);
   }
 };
+
+export const getAllOrders = async() => {
+  try {
+    const response = await axios.get(`${BASE_URL}/api/orders/all`);
+    return response.data;
+  } catch (error) {
+    console.log("Error:", error);
+    return [];
+  }
+}
