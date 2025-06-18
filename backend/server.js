@@ -1,6 +1,6 @@
-require('dotenv').config()
+require("dotenv").config();
 
-const { dirname } = require('path');
+const { dirname } = require("path");
 const appDir = dirname(require.main.filename);
 const app = require("./src/app");
 const utils = require("./utils/utils");
@@ -13,5 +13,5 @@ const PORT = process.env.PORT;
 const BASE_API_URL = process.env.BASE_API_URL;
 
 app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Server running on ${BASE_API_URL}:${PORT}`);
+  console.log(`Server running on ${BASE_API_URL}:${PORT}`);
 });

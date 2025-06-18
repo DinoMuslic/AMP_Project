@@ -10,4 +10,4 @@ const getAllFlowers = async () => {
   }
 };
 
-module.exports = { getAllFlowers }
+module.exports = { getAllFlowers };

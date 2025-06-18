@@ -23,7 +23,7 @@ export const postOrder = async (
   }
 };
 
-export const getAllOrders = async() => {
+export const getAllOrders = async () => {
   try {
     const response = await axios.get(`${BASE_URL}/api/orders/all`);
     return response.data;
@@ -31,4 +31,4 @@ export const getAllOrders = async() => {
     console.log("Error:", error);
     return [];
   }
-}
+};

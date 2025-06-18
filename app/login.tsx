@@ -47,8 +47,8 @@ const Login = () => {
 
       dispatch(login(user));
 
-      if(user.role === "regular") router.push("/home");
-      else if(user.role === "admin") router.push("/admin");
+      if (user.role === "regular") router.push("/home");
+      else if (user.role === "admin") router.push("/admin");
     } catch (err) {
       setError("Login failed. Please try again.");
     }

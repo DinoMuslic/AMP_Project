@@ -33,11 +33,13 @@ const DataTable: React.FC<DataTableProps> = ({
 
       {paginatedData.map((row, rowIndex) => (
         <View key={rowIndex} style={styles.row}>
-          {Object.values(row).slice(0, headers.length).map((value, i) => (
-            <Text key={i} style={styles.cell}>
-              {String(value)}
-            </Text>
-          ))}
+          {Object.values(row)
+            .slice(0, headers.length)
+            .map((value, i) => (
+              <Text key={i} style={styles.cell}>
+                {String(value)}
+              </Text>
+            ))}
         </View>
       ))}
 

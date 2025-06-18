@@ -20,7 +20,7 @@ const Page = () => {
 
   return (
     <View style={styles.container}>
-      <ActivityIndicator size={"large"} color={"#00A0B6"}/>
+      <ActivityIndicator size={"large"} color={"#00A0B6"} />
     </View>
   );
 };

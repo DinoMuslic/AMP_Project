@@ -4,7 +4,7 @@ const getAllFlowers = async (req, res) => {
   try {
     const flowers = await Flower.getAllFlowers();
 
-    const parsedFlowers = flowers.map(flower => ({
+    const parsedFlowers = flowers.map((flower) => ({
       ...flower,
       price: parseFloat(flower.price),
     }));
@@ -16,4 +16,4 @@ const getAllFlowers = async (req, res) => {
   }
 };
 
-module.exports = { getAllFlowers }
+module.exports = { getAllFlowers };

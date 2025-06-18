@@ -26,7 +26,9 @@ const Order = () => {
   const handleOrder = async () => {
     if (!fullName || !phone || !address) {
       setMessage("All fields are required");
-      setTimeout(() => { setMessage("") }, 3000);
+      setTimeout(() => {
+        setMessage("");
+      }, 3000);
       return;
     }
 

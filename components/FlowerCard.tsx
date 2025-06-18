@@ -42,7 +42,12 @@ const FlowerCard = ({ name, type, description, price, image }: Props) => {
         <View style={styles.orderContainer}>
           <TouchableOpacity style={styles.orderBtn}>
             <Text
-              style={{ textAlign: "center", color: "#00A0B6", fontSize: 14, fontWeight: "bold" }}
+              style={{
+                textAlign: "center",
+                color: "#00A0B6",
+                fontSize: 14,
+                fontWeight: "bold",
+              }}
               onPress={handleAdd}
             >
               Add to Cart

@@ -3,10 +3,10 @@ import userReducer from "./userSlice";
 import cartReducer from "./cartSlice";
 
 export const store = configureStore({
-    reducer: {
-        user: userReducer,
-        cart: cartReducer,
-    },
+  reducer: {
+    user: userReducer,
+    cart: cartReducer,
+  },
 });
 
 export type RootState = ReturnType<typeof store.getState>;

@@ -42,7 +42,7 @@ const AdminPage = () => {
     const fetchFlowers = async () => {
       const fetchedFlowers = await getAllFlowersRemovedProperties();
       setFlowers(fetchedFlowers);
-    }
+    };
 
     fetchOrders();
     fetchUsers();
@@ -64,10 +64,7 @@ const AdminPage = () => {
 
       <Text style={styles.heading}>FLOWERS</Text>
       <View style={styles.hr} />
-      <DataTable
-        headers={["Name", "Type", "Price"]}
-        data={flowers}
-      />
+      <DataTable headers={["Name", "Type", "Price"]} data={flowers} />
 
       <View style={styles.endSpacer} />
     </ScrollView>

@@ -7,7 +7,7 @@ const login = async (username_email, password) => {
       [username_email, username_email, password]
     );
 
-    return rows[0];    
+    return rows[0];
   } catch (error) {
     console.error("Database error:", error);
     throw error;
@@ -25,6 +25,5 @@ const register = async (username, email, password, role) => {
     throw error;
   }
 };
-
 
 module.exports = { login, register };
