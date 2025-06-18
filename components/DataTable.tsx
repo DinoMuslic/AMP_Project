@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import { useState } from "react";
+import { View, Text, StyleSheet, Pressable } from "react-native";
 
 interface DataTableProps {
   headers: string[];
@@ -19,55 +19,54 @@ const DataTable: React.FC<DataTableProps> = ({
     (page + 1) * itemsPerPage
   );
 
-  const renderHeader = () => (
-    <View style={styles.row}>
-      {headers.map((header, index) => (
-        <Text key={index} style={[styles.cell, styles.headerCell]}>
-          {header}
-        </Text>
-      ))}
-    </View>
-  );
-
-  const renderRow = ({ item }: { item: Record<string, any> }) => (
-    <View style={styles.row}>
-      {Object.values(item)
-        .slice(0, headers.length)
-        .map((value, index) => (
-          <Text key={index} style={styles.cell}>
-            {String(value)}
-          </Text>
-        ))}
-    </View>
-  );
-
   const totalPages = Math.ceil(data.length / itemsPerPage);
 
   return (
     <View style={styles.table}>
-      {renderHeader()}
-      <FlatList
-        data={paginatedData}
-        renderItem={renderRow}
-        keyExtractor={(_, index) => index.toString()}
-      />
+      <View style={[styles.row, styles.headerRow]}>
+        {headers.map((header, index) => (
+          <Text key={index} style={[styles.cell, styles.headerCell]}>
+            {header}
+          </Text>
+        ))}
+      </View>
+
+      {paginatedData.map((row, rowIndex) => (
+        <View key={rowIndex} style={styles.row}>
+          {Object.values(row).slice(0, headers.length).map((value, i) => (
+            <Text key={i} style={styles.cell}>
+              {String(value)}
+            </Text>
+          ))}
+        </View>
+      ))}
+
       {totalPages > 1 && (
         <View style={styles.pagination}>
-          <Text
-            style={[styles.pageBtn, page === 0 && styles.disabled]}
+          <Pressable
             onPress={() => page > 0 && setPage(page - 1)}
+            disabled={page === 0}
           >
-            Prev
-          </Text>
+            <Text style={[styles.pageBtn, page === 0 && styles.disabled]}>
+              Prev
+            </Text>
+          </Pressable>
           <Text style={styles.pageNumber}>
             Page {page + 1} of {totalPages}
           </Text>
-          <Text
-            style={[styles.pageBtn, page >= totalPages - 1 && styles.disabled]}
+          <Pressable
             onPress={() => page < totalPages - 1 && setPage(page + 1)}
+            disabled={page >= totalPages - 1}
           >
-            Next
-          </Text>
+            <Text
+              style={[
+                styles.pageBtn,
+                page >= totalPages - 1 && styles.disabled,
+              ]}
+            >
+              Next
+            </Text>
+          </Pressable>
         </View>
       )}
     </View>
@@ -81,15 +80,18 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 8,
+    marginBottom: 4,
     paddingHorizontal: 8,
+  },
+  headerRow: {
+    borderBottomWidth: 1,
+    borderColor: "#ccc",
+    marginBottom: 8,
   },
   cell: {
     flex: 1,
     textAlign: "center",
-    paddingVertical: 4,
-    borderBottomWidth: 0.5,
-    borderBottomColor: "#ccc",
+    paddingVertical: 6,
   },
   headerCell: {
     fontWeight: "bold",
@@ -100,12 +102,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 8,
+    marginTop: 12,
+    gap: 16,
   },
   pageBtn: {
-    marginHorizontal: 12,
-    color: "#00A0B6",
     fontWeight: "bold",
+    color: "#00A0B6",
   },
   disabled: {
     color: "#aaa",
